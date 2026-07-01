@@ -1,0 +1,6 @@
+alembic==1.18.5
+Requests==2.34.2
+SQLAlchemy==2.0.51
+charset-normalizer==3.4.7
+environs==15.0.1
+pip-chill==1.0.5
