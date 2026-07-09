@@ -57,6 +57,12 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 
+def include_object(object, name, type_, reflected, compare_to):
+    if type_ == "table" and name != "apartments":
+        return False
+    return True
+
+
 def do_run_migrations(connection: Connection) -> None:
     context.configure(
         connection=connection,
@@ -96,8 +102,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-
-def include_object(object, name, type_, reflected, compare_to):
-    if type_ == "table" and name != "apartments":
-        return False
-    return True
