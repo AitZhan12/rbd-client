@@ -53,6 +53,7 @@ class Apartment(Base):
     load_source: Mapped[int | None] = mapped_column(Integer)
 
     memo_public: Mapped[str | None] = mapped_column(String)
+    memo_rewritten: Mapped[str | None] = mapped_column(String)
 
     dt_create: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     dt_modify: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

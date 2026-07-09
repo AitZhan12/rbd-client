@@ -58,7 +58,11 @@ def run_migrations_offline() -> None:
 
 
 def do_run_migrations(connection: Connection) -> None:
-    context.configure(connection=connection, target_metadata=target_metadata)
+    context.configure(
+        connection=connection,
+        target_metadata=target_metadata,
+        include_object=include_object,
+    )
 
     with context.begin_transaction():
         context.run_migrations()
@@ -94,6 +98,6 @@ else:
     run_migrations_online()
 
 def include_object(object, name, type_, reflected, compare_to):
-    if type_ == "table" and name not in ["apartments"]:
+    if type_ == "table" and name != "apartments":
         return False
     return True

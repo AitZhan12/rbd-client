@@ -7,6 +7,7 @@ from datetime import date
 import requests, json, time
 from requests import Session
 
+from chane_memo_public import is_kazakh, process_item_llm
 from checkpoint import load_checkpoint, save_checkpoint, clear_checkpoint
 from dataclass import SearchFilters
 from db.crud import upsert_apartments
@@ -108,6 +109,11 @@ async def enrich_item(session, data):
         else:
             logging.warning(f"No phone number found for apartment ID: {item['id']}")
 
+        supply = details.get('supply', {})
+        memo = supply.get('memoPublic', '')
+        if not is_kazakh(memo):
+            item['memo_rewritten'] = await process_item_llm(memo)
+            
         batch.append(item)
         logging.info(f'Successfully enriched apartment ID: {item["id"]}')
         await asyncio.sleep(random.uniform(0.1, 0.5))

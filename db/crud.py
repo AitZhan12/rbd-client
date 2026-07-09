@@ -90,3 +90,20 @@ async def change_deal(source_id, param):
             .values(deal_type=param)
         )
         await session.commit()
+
+
+async def get_batch(session, limit: int = 1000):
+    result = await session.execute(
+        select(Apartment)
+        .order_by(Apartment.dt_create.desc())
+        .limit(limit)
+    )
+    return result.scalars().all()
+
+
+async def save_llm_memo(session, item, rewritten: str):
+    await session.execute(
+        update(Apartment)
+        .where(Apartment.source_id == item.source_id)
+        .values(memo_rewritten=rewritten)
+    )

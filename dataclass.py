@@ -73,6 +73,7 @@ def map_item_to_row(item: dict) -> dict:
 
         # текст
         "memo_public": item.get("memoPublic"),
+        "memo_rewritten": item.get("memo_rewritten"),
 
         # даты с сайта
         "dt_create": parse_dt(item.get("dtCreate")),
