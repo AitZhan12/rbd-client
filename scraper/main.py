@@ -7,12 +7,12 @@ from datetime import date
 import requests, json, time
 from requests import Session
 
-from change_memo_public import is_kazakh, process_item_llm
-from checkpoint import load_checkpoint, save_checkpoint, clear_checkpoint
-from dataclass import SearchFilters
+from scraper.change_memo_public import is_kazakh, process_item_llm
+from scraper.checkpoint import load_checkpoint, save_checkpoint, clear_checkpoint
+from scraper.dataclass import SearchFilters
 from db.crud import upsert_apartments
 
-from filters import build_payload, build_payload_get
+from scraper.filters import build_payload, build_payload_get
 from config import settings
 
 

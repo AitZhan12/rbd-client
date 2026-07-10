@@ -1,4 +1,4 @@
-from dataclass import SearchFilters
+from scraper.dataclass import SearchFilters
 
 
 def build_payload(filters: SearchFilters, page=1):
