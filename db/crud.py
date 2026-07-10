@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from dataclass import map_item_to_row
+from scraper.dataclass import map_item_to_row
 from db.db import async_session
 from models.apartment import Apartment
 

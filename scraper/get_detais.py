@@ -7,8 +7,8 @@ import requests
 from requests import Session
 
 from db.crud import update_apartments
-from filters import build_payload_get
-from main import get_login, make_request, extract_photo_urls
+from scraper.filters import build_payload_get
+from scraper.main import get_login, make_request, extract_photo_urls
 
 from config import settings
 

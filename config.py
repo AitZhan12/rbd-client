@@ -20,5 +20,8 @@ class Settings:
         self.BASE_DIR = Path(__file__).parent
         self.FILES_DIR = self.BASE_DIR / 'files'
 
+        # --- LLM ---
+        self.OLLAMA_URL = "http://localhost:11434/api/generate"
+        self.MODEL = "second_constantine/t-lite-it-2.1:8b"
 
 settings = Settings()
