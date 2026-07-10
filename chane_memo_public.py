@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import time
+
 import requests
 
 from db.crud import get_batch, save_llm_memo
@@ -10,13 +12,19 @@ OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL = "second_constantine/t-lite-it-2.1:8b"
 
 
-def query_llm(prompt: str) -> str:
-    r = requests.post(OLLAMA_URL, json={
-        "model": MODEL,
-        "prompt": prompt,
-        "stream": False,
-    })
-    return r.json()["response"]
+def query_llm(prompt: str, retries: int = 3) -> str:
+    for attempt in range(retries):
+        try:
+            r = requests.post(OLLAMA_URL, json={
+                "model": MODEL,
+                "prompt": prompt,
+                "stream": False,
+            }, timeout=120)
+            return r.json()["response"]
+        except (requests.ConnectionError, requests.Timeout) as e:
+            logging.warning(f"LLM retry {attempt+1}/{retries}: {e}")
+            time.sleep(5)
+    return ""
 
 
 def is_kazakh(text: str) -> bool:
@@ -49,6 +57,9 @@ async def main():
                     continue
 
                 r = await process_item_llm(item.memo_public)
+                if not r:
+                    continue
+
                 logging.info(f"ID {item.source_id}: {r[:30]}")
                 await save_llm_memo(session, item, r)
                 if i % 50 == 0:
