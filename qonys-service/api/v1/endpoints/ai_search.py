@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from db.session import get_session
+from db.db import get_session
 from ai.extractor import extract_params
 from ai.query_builder import build_query
 from schemas.apartment import ApartmentListOut
