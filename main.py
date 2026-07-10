@@ -112,7 +112,9 @@ async def enrich_item(session, data):
         supply = details.get('supply', {})
         memo = supply.get('memoPublic', '')
         if not is_kazakh(memo):
-            item['memo_rewritten'] = await process_item_llm(memo)
+            r = await process_item_llm(memo)
+            if r:
+                item['memo_rewritten'] = r
             
         batch.append(item)
         logging.info(f'Successfully enriched apartment ID: {item["id"]}')
