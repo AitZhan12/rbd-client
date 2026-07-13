@@ -32,8 +32,8 @@ headers = {
 }
 
 def get_login(session: Session):
-    username = settings.username
-    password = settings.password
+    username = settings.RBD_EMAIL
+    password = settings.RBD_PASSWORD
     url = settings.LOGIN_URL
 
     payload = {
