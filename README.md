@@ -1,10 +1,8 @@
 ### Start commands:
 
 ```bash
-    python main.py --city 4 --lease       # аренда
-    
-    python main.py --city 4 --sell        # продажа
-    
-    python main.py --city 4 --sell --new  # новые за текущий день
+docker compose run --rm -e LOG_FILE=logs/scraper-sell.log scraper python -m scraper.main --sell --new
+
+docker compose run --rm -e LOG_FILE=logs/scraper-lease.log scraper python -m scraper.main --lease --new
 ```
 
