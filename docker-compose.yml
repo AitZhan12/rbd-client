@@ -5,8 +5,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./scraper-sell.log:/app/scraper-sell.log
-      - ./scraper-lease.log:/app/scraper-lease.log
+      - ./logs:/app/logs
     extra_hosts:
       - "host.docker.internal:host-gateway"
     profiles: ["manual"]

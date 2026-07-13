@@ -17,7 +17,7 @@ from scraper.filters import build_payload, build_payload_get
 from config import settings
 
 
-log_file = os.getenv("LOG_FILE", "../scraper.log")
+log_file = os.getenv("LOG_FILE", "logs/scraper.log")
 
 logging.basicConfig(
     level=logging.INFO,
