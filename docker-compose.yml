@@ -1,0 +1,9 @@
+services:
+  scraper:
+    build: .
+    container_name: scraper_rbd
+    env_file:
+      - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    profiles: ["manual"]

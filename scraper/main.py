@@ -192,6 +192,5 @@ if __name__ == "__main__":
     print(f'--sell: {args.sell}')
     print(f'--lease: {args.lease}')
     print(f'--new: {args.new}')
-    filters = SearchFilters(city=4, sell=args.sell, lease=args.lease, rooms=args.rooms, source=args.source,
-                            new=args.new)
+    filters = SearchFilters(city=4, sell=args.sell, lease=args.lease, rooms=args.rooms, source=args.source, new=args.new)
     asyncio.run(get_list_apartments(filters))
