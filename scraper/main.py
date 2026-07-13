@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import os
 import random
 import logging
 from datetime import date
@@ -16,12 +17,14 @@ from scraper.filters import build_payload, build_payload_get
 from config import settings
 
 
+log_file = os.getenv("LOG_FILE", "../scraper.log")
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("../scraper.log", encoding="utf-8"),
-        logging.StreamHandler()  # оставляет вывод в консоль
+        logging.FileHandler(log_file, encoding="utf-8"),
+        logging.StreamHandler()
     ]
 )
 

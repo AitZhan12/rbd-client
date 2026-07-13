@@ -4,6 +4,9 @@ services:
     container_name: scraper_rbd
     env_file:
       - .env
+    volumes:
+      - ./scraper-sell.log:/app/scraper-sell.log
+      - ./scraper-lease.log:/app/scraper-lease.log
     extra_hosts:
       - "host.docker.internal:host-gateway"
     profiles: ["manual"]
