@@ -75,8 +75,8 @@ def make_request(session: Session, url: str, payload: dict = None, method: str =
             get_login(session)
             continue
 
-        logging.warning(f"Attempt {attempt + 1}/{_retries} failed with status {r.status_code}")
-        logging.warning(f"Error: {r.text}")
+        # logging.warning(f"Attempt {attempt + 1}/{_retries} failed with status {r.status_code}")
+        # logging.warning(f"Error: {r.text}")
         time.sleep(1)
 
     logging.error(f"All {_retries} attempts failed for URL: {url}")
@@ -112,12 +112,12 @@ async def enrich_item(session, data):
         else:
             logging.warning(f"No phone number found for apartment ID: {item['id']}")
 
-        supply = details.get('supply', {})
-        memo = supply.get('memoPublic', '')
-        if not is_kazakh(memo):
-            r = await process_item_llm(memo)
-            if r:
-                item['memo_rewritten'] = r
+        # supply = details.get('supply', {})
+        # memo = supply.get('memoPublic', '')
+        # if not is_kazakh(memo):
+        #     r = await process_item_llm(memo)
+        #     if r:
+        #         item['memo_rewritten'] = r
             
         batch.append(item)
         logging.info(f'Successfully enriched apartment ID: {item["id"]}')
