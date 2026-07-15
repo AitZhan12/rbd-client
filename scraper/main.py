@@ -3,12 +3,13 @@ import asyncio
 import os
 import random
 import logging
+from logging.handlers import RotatingFileHandler
 from datetime import date
 
 import requests, json, time
 from requests import Session
 
-from scraper.change_memo_public import is_kazakh, process_item_llm
+# from scraper.change_memo_public import is_kazakh, process_item_llm
 from scraper.checkpoint import load_checkpoint, save_checkpoint, clear_checkpoint
 from scraper.dataclass import SearchFilters
 from db.crud import upsert_apartments
@@ -23,7 +24,12 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(log_file, encoding="utf-8"),
+        RotatingFileHandler(
+            log_file,
+            maxBytes=10 * 1024 * 1024,
+            backupCount=5,
+            encoding="utf-8"
+        ),
         logging.StreamHandler()
     ]
 )
